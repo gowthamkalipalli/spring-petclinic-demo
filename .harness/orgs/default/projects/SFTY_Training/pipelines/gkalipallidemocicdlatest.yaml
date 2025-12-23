@@ -19,8 +19,9 @@ pipeline:
         spec:
           cloneCodebase: true
           caching:
-            enabled: true
+            enabled: false
             override: false
+            paths: []
           platform:
             os: Linux
             arch: Amd64
@@ -50,3 +51,5 @@ pipeline:
                     repo: gowthamk4/harness
                     tags:
                       - v1
+          buildIntelligence:
+            enabled: false
