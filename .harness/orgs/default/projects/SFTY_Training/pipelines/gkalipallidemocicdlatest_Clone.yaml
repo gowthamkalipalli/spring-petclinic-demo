@@ -41,12 +41,14 @@ pipeline:
                     shell: Sh
                     command: mvn clean package -DskipTests -Dcheckstyle.skip=true
               - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
+                  type: BuildAndPushGAR
+                  name: BuildAndPushGAR_1
+                  identifier: BuildAndPushGAR_1
                   spec:
-                    connectorRef: dockerhub_connecter
-                    repo: gowthamk4/harness
+                    connectorRef: gkalipalliGCPConnector
+                    host: us.gcr.io
+                    projectID: bustling-tuner-482104-a0
+                    imageName: harness-demo
                     tags:
                       - v1
           buildIntelligence:
