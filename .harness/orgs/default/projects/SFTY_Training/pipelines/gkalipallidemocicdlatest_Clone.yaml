@@ -51,6 +51,27 @@ pipeline:
                     imageName: harness-demo
                     tags:
                       - v1
+              - step:
+                  type: AquaTrivy
+                  name: AquaTrivy_1
+                  identifier: AquaTrivy_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: container
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                    privileged: true
+                    image:
+                      type: docker_v2
+                      tag: v1
+                      name: us.gcr.io/harness-demo
+                      domain: us-central1-docker.pkg.dev
+                    sbom:
+                      format: spdx-json
           buildIntelligence:
             enabled: false
   identifier: gkalipallidemocicdlatest_Clone
