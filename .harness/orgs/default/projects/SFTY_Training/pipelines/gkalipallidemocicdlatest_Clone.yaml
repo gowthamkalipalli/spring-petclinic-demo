@@ -68,8 +68,8 @@ pipeline:
                     image:
                       type: docker_v2
                       tag: v1
-                      name: us.gcr.io/harness-demo
-                      domain: us-central1-docker.pkg.dev
+                      name: bustling-tuner-482104-a0/us.gcr.io/harness-demo
+                      domain: us.gcr.io
                     sbom:
                       format: spdx-json
           buildIntelligence:
