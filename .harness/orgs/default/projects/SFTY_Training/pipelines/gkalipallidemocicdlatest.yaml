@@ -1,0 +1,55 @@
+pipeline:
+  name: gkalipalli-demo-cicd-latest
+  identifier: gkalipallidemocicdlatest
+  projectIdentifier: SFTY_Training
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: gowtham_nanda
+        repoName: spring-petclinic-demo
+        build: <+input>
+  stages:
+    - stage:
+        name: ci
+        identifier: ci
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: false
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec:
+              size: flex
+              imageSpec:
+                imageName: ubuntu-24
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: dockerhub_connecter
+                    image: maven:3.9-eclipse-temurin-17
+                    shell: Sh
+                    command: |-
+                      cd spring-boot-app
+
+                      mvn clean package -DskipTests -Dcheckstyle.skip=true
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: dockerhub_connecter
+                    repo: gowthamk4/harness
+                    tags:
+                      - v1
