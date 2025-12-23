@@ -34,16 +34,13 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Run_1
+                  name: Maven Build
                   identifier: Run_1
                   spec:
                     connectorRef: dockerhub_connecter
                     image: maven:3.9-eclipse-temurin-17
                     shell: Sh
-                    command: |-
-                      cd spring-boot-app
-
-                      mvn clean package -DskipTests -Dcheckstyle.skip=true
+                    command: mvn clean package -DskipTests -Dcheckstyle.skip=true
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
